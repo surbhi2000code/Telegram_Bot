@@ -1,6 +1,7 @@
 import constatnts as keys
-import telegram.ext
+from telegram.ext import Handler, Updater, MessageHandler, CommandHandler, Filters
 import responses as R
+
 
 print("Bot started....")
 def start_command(update, context):
@@ -14,17 +15,13 @@ def handle_message(update, context):
     response = R.sample_responses(text)
     update.message.reply_text(response)
 
-def error(update, context):
-    print(f"update {update} caused error {context.error}")
-
 def main():
     updater = Updater(keys.API_KEY, use_context = True)
     dp = updater.dispatcher
 
     dp.add_handler(CommandHandler("Start", start_command))
-    dp.add_handler(CommandHandler("start", help_command))
+    dp.add_handler(CommandHandler("help", help_command))
     dp.add_handler(MessageHandler(Filters.text, handle_message))
-    dp.add_handler(error)
     updater.start_polling()
     updater.idle()
 
