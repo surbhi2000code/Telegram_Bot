@@ -3,7 +3,6 @@ import wikipedia
 import pyjokes
 import pywhatkit
 
-
 def sample_responses(input_text):
     user_message = str(input_text).lower()
 
